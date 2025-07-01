@@ -15,6 +15,7 @@ export default function BlogPage() {
         setLoading(true);
         setError(null);
         const response = await blogAPI.getAllBlogs();
+        console.log(response, "response");
 
         // Transform the API response to match our expected format
         const transformedBlogs =
@@ -24,6 +25,7 @@ export default function BlogPage() {
             slug: blog.slug || "",
             title: blog.title || "",
             category: "Blog", // Default category since it's not in the API response
+            thumbnail: blog.thumbnail,
             date: blog.publishedAt
               ? new Date(blog.publishedAt).toLocaleDateString("en-US", {
                   day: "numeric",
@@ -38,6 +40,7 @@ export default function BlogPage() {
             image: "/blog1.jpg", // Default image since it's not in the API response
             htmlContent: blog.htmlContent,
             cssContent: blog.cssContent,
+            publishedAt: blog.publishedAt, // Include original publishedAt for detail page
           })) || [];
 
         setBlogs(transformedBlogs);
@@ -156,7 +159,7 @@ export default function BlogPage() {
             }}
           >
             <Image
-              src={blog.image}
+              src={blog.thumbnail}
               alt={blog.title}
               width={600}
               height={300}
@@ -197,7 +200,26 @@ export default function BlogPage() {
                 {blog.excerpt}
               </p>
 
-              <Link href={`/blog/${blog.slug}`}>
+              <Link
+                href={{
+                  pathname: `/blog/${blog.slug}`,
+                  query: {
+                    data: JSON.stringify({
+                      id: blog.id,
+                      documentId: blog.documentId,
+                      slug: blog.slug,
+                      title: blog.title,
+                      category: blog.category,
+                      date: blog.date,
+                      excerpt: blog.excerpt,
+                      image: blog.image,
+                      htmlContent: blog.htmlContent,
+                      cssContent: blog.cssContent,
+                      publishedAt: blog.publishedAt,
+                    }),
+                  },
+                }}
+              >
                 <span
                   style={{
                     color: "#e53935",

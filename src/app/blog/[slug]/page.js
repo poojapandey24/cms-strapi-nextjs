@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { notFound } from "next/navigation";
+import { notFound, useSearchParams } from "next/navigation";
 import { blogAPI } from "@/lib/api";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,9 +9,10 @@ export default function BlogDetailPage({ params }) {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const fetchBlog = async () => {
+    const initializeBlog = async () => {
       if (!params?.slug) {
         setError("No slug provided");
         setLoading(false);
@@ -21,6 +22,34 @@ export default function BlogDetailPage({ params }) {
       try {
         setLoading(true);
         setError(null);
+
+        // First, try to get data from URL query parameters
+        const dataParam = searchParams.get("data");
+
+        if (dataParam) {
+          try {
+            const blogData = JSON.parse(dataParam);
+            setBlog({
+              ...blogData,
+              contentHTML: blogData.htmlContent || "",
+              author: "Admin", // Default author
+              publishedDate: blogData.publishedAt
+                ? new Date(blogData.publishedAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                : "",
+            });
+            setLoading(false);
+            return;
+          } catch (parseError) {
+            console.error("Failed to parse blog data from URL:", parseError);
+            // Fall back to API call if URL data parsing fails
+          }
+        }
+
+        // If no URL data or parsing failed, fetch from API
         const response = await blogAPI.getBlogBySlug(params.slug);
 
         if (response.data && response.data.length > 0) {
@@ -65,8 +94,8 @@ export default function BlogDetailPage({ params }) {
       }
     };
 
-    fetchBlog();
-  }, [params?.slug]);
+    initializeBlog();
+  }, [params?.slug, searchParams]);
 
   if (loading) {
     return (

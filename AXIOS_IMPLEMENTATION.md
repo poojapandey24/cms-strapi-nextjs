@@ -46,10 +46,11 @@ This implementation adds axios for fetching blog data from a custom API instead 
 - Back to blog list functionality
 
 ### ✅ Data Flow Architecture
-- **Listing Page**: Fetches all blogs → Displays in grid → Links to detail pages
-- **Detail Page**: Receives slug from URL → Fetches specific blog → Displays full content
+- **Listing Page**: Fetches all blogs → Displays in grid → Passes data via URL query parameters → Links to detail pages
+- **Detail Page**: Receives data from URL first → Falls back to API if needed → Displays full blog content
 - **Error Handling**: Graceful fallbacks at both levels
 - **Loading States**: User feedback during data fetching
+- **Performance**: Reduces API calls by passing data through URL
 
 ### ✅ Error Handling
 - Network error handling
@@ -118,12 +119,13 @@ const blog = await blogAPI.getBlogByDocumentId('ppzefx50bdlx78avgb344ba2');
 1. **Blog Listing Page** (`/blog`):
    - Fetches all blogs from API
    - Displays in responsive grid
-   - Each blog card links to detail page
+   - Each blog card passes complete data via URL query parameters
+   - Links to detail page with embedded data
 
 2. **Blog Detail Page** (`/blog/[slug]`):
-   - Receives slug from URL parameters
-   - Fetches specific blog data
-   - Displays full blog content with HTML rendering
+   - First tries to get data from URL query parameters (faster)
+   - Falls back to API call if URL data is not available
+   - Displays full blog content with HTML rendering and custom CSS
    - Provides breadcrumb navigation back to listing
 
 ### Custom API Configuration
