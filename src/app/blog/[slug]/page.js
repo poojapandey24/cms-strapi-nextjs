@@ -107,7 +107,7 @@ export default function BlogDetailPage({ params }) {
 
   if (loading) {
     return (
-      <div className="bg-[#030b1a] text-white min-h-screen">
+      <div className="text-white min-h-screen">
         <Header />
         <main style={{ padding: "2rem", maxWidth: "900px", margin: "auto" }}>
           <div
@@ -130,7 +130,7 @@ export default function BlogDetailPage({ params }) {
 
   if (error || !blog) {
     return (
-      <div className="bg-[#030b1a] text-white min-h-screen">
+      <div className="text-white min-h-screen">
         <Header />
         <main style={{ padding: "2rem", maxWidth: "900px", margin: "auto" }}>
           <div
@@ -152,7 +152,7 @@ export default function BlogDetailPage({ params }) {
   }
 
   return (
-    <div className="bg-[#030b1a] text-white min-h-screen">
+    <div className="text-white min-h-screen">
       <Header />
       <main
         style={{

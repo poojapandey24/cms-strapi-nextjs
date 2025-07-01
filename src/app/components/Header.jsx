@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <nav className="flex justify-between items-center px-6 py-4 border-b border-white/10">
+    <nav className="bg-[#030b1a] flex justify-between items-center px-6 py-4 border-b border-white/10">
       <div className="text-2xl font-bold flex items-center gap-2">
         <Image src="/logo.svg" width={24} height={24} alt="Logo" />
         <span>CRM Boost</span>
@@ -13,9 +13,9 @@ export default function Header() {
         <Link href="/blog" className="hover:text-white cursor-pointer">
           Blog
         </Link>
-        <Link href="/events" className="hover:text-white cursor-pointer">
+        {/* <Link href="/events" className="hover:text-white cursor-pointer">
           Events
-        </Link>
+        </Link> */}
       </div>
       <div className="flex gap-3">
         <button className="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600">
@@ -27,4 +27,4 @@ export default function Header() {
       </div>
     </nav>
   );
-} 
+}

@@ -94,9 +94,9 @@ export default function BlogPage() {
 
   if (loading) {
     return (
-      <div className="bg-[#030b1a] text-white min-h-screen">
+      <div className="text-white min-h-screen">
         <Header />
-        <main style={{ padding: "2rem" }}>
+        <main style={{ padding: "2rem", background: "#fff" }}>
           <h1 style={{ fontSize: "2rem", marginBottom: "1.5rem" }}>
             Latest Blog Posts
           </h1>
@@ -120,9 +120,9 @@ export default function BlogPage() {
 
   if (error) {
     return (
-      <div className="bg-[#030b1a] text-white min-h-screen">
+      <div className="text-white min-h-screen">
         <Header />
-        <main style={{ padding: "2rem" }}>
+        <main style={{ padding: "2rem", background: "#fff" }}>
           <h1 style={{ fontSize: "2rem", marginBottom: "1.5rem" }}>
             Latest Blog Posts
           </h1>
@@ -145,9 +145,9 @@ export default function BlogPage() {
   }
 
   return (
-    <div className="bg-[#030b1a] text-white min-h-screen">
+    <div className="text-white min-h-screen">
       <Header />
-      <main style={{ padding: "2rem" }}>
+      <main style={{ padding: "2rem", background: "#fff" }}>
         <h1 style={{ fontSize: "2rem", marginBottom: "1.5rem" }}>
           Latest Blog Posts
         </h1>
