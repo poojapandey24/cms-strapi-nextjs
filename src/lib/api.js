@@ -40,7 +40,7 @@ export const blogAPI = {
   // Get all blogs
   getAllBlogs: async () => {
     try {
-      const response = await api.get("/blogs");
+      const response = await api.get("/blogs?populate=image");
       return response.data;
     } catch (error) {
       console.error("Error fetching blogs:", error);
@@ -51,7 +51,9 @@ export const blogAPI = {
   // Get blog by slug
   getBlogBySlug: async (slug) => {
     try {
-      const response = await api.get(`/blogs?slug=${slug}`);
+      const response = await api.get(
+        `/blogs?filters[slug][$eq]=${slug}&populate=image`
+      );
       return response.data;
     } catch (error) {
       console.error("Error fetching blog by slug:", error);
@@ -62,7 +64,7 @@ export const blogAPI = {
   // Get blog by document ID
   getBlogByDocumentId: async (documentId) => {
     try {
-      const response = await api.get(`/blogs/${documentId}`);
+      const response = await api.get(`/blogs/${documentId}?populate=image`);
       return response.data;
     } catch (error) {
       console.error("Error fetching blog by document ID:", error);
