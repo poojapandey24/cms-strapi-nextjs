@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 const testimonials = [
   {
@@ -22,7 +22,7 @@ const testimonials = [
     title: "CEO",
     text: "Your CRM web app has had a significant impact on our bottom line. It has empowered our team to stay organized, track leads effectively, and close deals faster.",
   },
-   {
+  {
     name: "John D.",
     title: "Sales Manager",
     text: "Using your CRM web app has completely transformed the way we manage our customer relationships. It's intuitive, feature-rich, and has helped us streamline our sales processes. Highly recommended!",
@@ -36,13 +36,13 @@ const testimonials = [
     name: "Michael R.",
     title: "CEO",
     text: "Your CRM web app has had a significant impact on our bottom line. It has empowered our team to stay organized, track leads effectively, and close deals faster.",
-  }
+  },
 ];
 
 export default function TestimonialsSlider() {
   return (
-    <section className="py-20 px-6 max-w-7xl mx-auto text-white">
-      <h2 className="text-3xl text-center font-bold mb-12">What People Say About Us</h2>
+    <section className="testimonials-section">
+      <h2 className="testimonials-title">What People Say About Us</h2>
       <Swiper
         modules={[Pagination, Navigation]}
         spaceBetween={30}
@@ -60,16 +60,16 @@ export default function TestimonialsSlider() {
       >
         {testimonials.map((t, i) => (
           <SwiperSlide key={i}>
-            <div className="bg-[#0f1e39] border border-white/10 rounded-lg p-6 h-full flex flex-col justify-between">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-10 h-10 bg-white rounded-full" />
+            <div className="testimonial-card">
+              <div className="testimonial-header">
+                <div className="testimonial-avatar" />
                 <div>
-                  <p className="font-semibold">{t.name}</p>
-                  <p className="text-sm text-white/50">{t.title}</p>
+                  <p className="testimonial-name">{t.name}</p>
+                  <p className="testimonial-title">{t.title}</p>
                 </div>
               </div>
-              <p className="text-white/80 text-sm mb-6">“{t.text}”</p>
-              <div className="text-3xl text-cyan-400 self-end">🎵</div>
+              <p className="testimonial-text">&ldquo;{t.text}&rdquo;</p>
+              <div className="testimonial-quote">🎵</div>
             </div>
           </SwiperSlide>
         ))}

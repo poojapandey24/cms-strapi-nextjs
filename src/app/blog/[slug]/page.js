@@ -160,6 +160,7 @@ export default function BlogDetailPage({ params }) {
           maxWidth: "900px",
           margin: "auto",
           color: "#ffffff",
+          background: "#fff",
         }}
       >
         {/* Breadcrumb */}
